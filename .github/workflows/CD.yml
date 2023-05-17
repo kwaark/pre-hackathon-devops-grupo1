@@ -1,4 +1,4 @@
-name: CI
+name: CD
 
 on:
   push:
@@ -45,7 +45,7 @@ jobs:
 
         with:
 
-          path: 'build'
+          path: 'pre-hackathon-devops-grupo1/src'
 
 
       - name: Deploy to GitHub Pages
