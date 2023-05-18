@@ -45,7 +45,7 @@ jobs:
 
         with:
 
-          path: 'pre-hackathon-devops-grupo1/'
+          path: '.'
 
 
       - name: Deploy to GitHub Pages
