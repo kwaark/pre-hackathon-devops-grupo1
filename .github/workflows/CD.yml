@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   
 jobs:
-  Ci:
+  CD:
     runs-on: ubuntu-latest
     
     steps:
@@ -45,7 +45,7 @@ jobs:
 
         with:
 
-          path: 'pre-hackathon-devops-grupo1/public'
+          path: 'pre-hackathon-devops-grupo1/'
 
 
       - name: Deploy to GitHub Pages
