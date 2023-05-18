@@ -4,47 +4,44 @@ on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
-  
+
 permissions:
   contents: read
   pages: write
   id-token: write
-  
+
 jobs:
   CD:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        
+        uses: actions/checkout@v2
+      
       - name: Set up Node.js 16.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2-beta
         with:
-          node-version: 16.x
-          
+          node-version: '16'
+
       - name: Install dependencies
         run: npm install
-      
+
       - name: Run the tests
         run: npm run test -- --coverage
         env:
           CI: true
-          
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+
+      - name: Build for production and Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3.7.1
         with:
-          path: /public
-      
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2    
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          cname: example.com # Substitua pelo domínio do seu site
+          git_config_user_name: kwaark
+          git_config_user_email: junior8831@hotmail.com
